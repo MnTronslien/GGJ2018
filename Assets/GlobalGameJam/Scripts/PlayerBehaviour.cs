@@ -33,8 +33,8 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioClip _backwardSound;
 
     [Header("Movement Tweaking")]
-    [Range(0.1f,0.5f)] public float _movementSpeed;
-    [Range(1f, 10f)] public float _chargeMultiplier;
+    [Range(0.1f, 0.5f)] public float _idleApproachSpeed = 0.2f;
+    [Range(1f, 10f)] public float _chargeMultiplier = 1;
 
 
     //other global variables
@@ -52,7 +52,6 @@ public class PlayerBehaviour : MonoBehaviour
     public float _moveDuration = 1;         //base value of 1 second
     public float _lightPunchDuration = 1;   //base value of 1 second
     public float _heavyPunchDuration = 1;   //base value of 1 second
-    public float _idleApproachSpeed = 1;     //base value of 1 second
     private GameObject _otherPlayer;
     public float _maximumCloseness = 1;
 
@@ -173,11 +172,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (_playerNumber == 1)
             {
-                transform.position = transform.position + (Vector3.right * _movementSpeed);
+                transform.position = transform.position + (Vector3.right * _idleApproachSpeed);
             }
             else
             {
-                transform.position = transform.position + (Vector3.left * _movementSpeed);
+                transform.position = transform.position + (Vector3.left * _idleApproachSpeed);
             }
         }
     }

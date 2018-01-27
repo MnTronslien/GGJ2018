@@ -211,7 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874470f18d39c5443872e330d49279f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 3
   _punches:
   - {fileID: 8300000, guid: ca7cf565dde861a45a26f3f0c0d79fea, type: 3}
   - {fileID: 8300000, guid: 3e5cf4c59b670614887ff3764f52f519, type: 3}
@@ -219,14 +218,13 @@ MonoBehaviour:
   _powerPunch: {fileID: 8300000, guid: 1778a980e14f8264681ceac99a3bee1b, type: 3}
   _forwardSound: {fileID: 0}
   _backwardSound: {fileID: 0}
-  _movementSpeed: 0
-  _chargeMultiplier: 0
+  _idleApproachSpeed: 0.2
+  _chargeMultiplier: 1
   _playerNumber: 1
   _charge: 0
   _moveDuration: 0.01
   _lightPunchDuration: 1
   _heavyPunchDuration: 1
-  _idleApproachSpeed: 0.5
   _maximumCloseness: 2.2
 --- !u!212 &212247610648970144
 SpriteRenderer:
