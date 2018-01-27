@@ -42,7 +42,12 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Light, Heavy //If we get more attacks in the future, like projectile. add them as options under this enum
     }
-    public float _moveDuration = 1;
+    public float _moveDuration = 1;         //base value of 1 second
+    public float _lightPunchDuration = 1;   //base value of 1 second
+    public float _heavyPunchDuration = 1;   //base value of 1 second
+    public float _idleApproachSpeed = 1;     //base value of 1 second
+    public GameObject _otherPlayer;
+
 
 
     //Setting up component references, Awake() is called before Start()
@@ -52,20 +57,18 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.LogError("A script with playerBehaviour attached has not been assigned a player number or the player number is 0!");
         }
+        if (_otherPlayer == null)
+        {
+            GameObject.Find("Player " + _playerNumber);
+        }
+        gameObject.name = "Player " + _playerNumber;
         Debug.Log("<b>Controlls:</b> left ctrl (p1) & right ctrl (p2)");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //todo: Remove this debug
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    StartCoroutine(Moving(Direction.Backward));
-        //}
 
-
-        gameObject.name = "Player " + _state; //For debugging
 
         if (_state != _lastState) //detect state transition
         {
@@ -118,6 +121,7 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     _state = State.Punching;
                     Punch(Attack.Heavy);
+                    //TODO:PlayPuch animation
                 }
 
             }
@@ -129,9 +133,34 @@ public class PlayerBehaviour : MonoBehaviour
 
     } //End Update
 
-    private IEnumerator Punch(Attack light)
+    private void Approach(Direction dir)
     {
-        throw new NotImplementedException();
+        if (_state == State.Idle)
+        {
+            if (_playerNumber == 1)
+            {
+                transform.position = transform.position + (Vector3.right * 0.2f);
+            }
+            else
+            {
+                transform.position = transform.position + (Vector3.left * 0.2f);
+            }
+        }
+    }
+
+    private IEnumerator Punch(Attack att)
+    {
+        //play punch animation
+
+        if (att == Attack.Light)
+        {
+            //TODO: play light attack animation
+            for (float i = 0; i < _lightPunchDuration; i += Time.deltaTime) //this should match the timing of the animation.
+            {
+                yield return null;
+            }
+        }
+        _state = State.Idle;
     }
 
     private IEnumerator Moving(Direction dir)
@@ -168,6 +197,10 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         //charge reset on state exit and not here
+    }
+    public void hitDetection()
+    {
+
     }
 
 
