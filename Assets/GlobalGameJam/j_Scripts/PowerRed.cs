@@ -5,29 +5,27 @@ using UnityEngine;
 public class PowerRed: MonoBehaviour
 {
 
-    public float maxPower;
-    public float MattiasSinIntegerRed = 100;
+    public PlayerBehaviour _PB;
     public GameObject myPowerBar;
-    public float CurrentPower;
 
     void Start()
     {
+        if (_PB == null)
+        {
+            _PB = GetComponent<PlayerBehaviour>();
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        GeneratePower();
-    }
-
-    void GeneratePower()
-    {
-        SetPowerToCanvas(MattiasSinIntegerRed);
+        SetPowerToCanvas(_PB._charge);
     }
 
     void SetPowerToCanvas(float myPower)
     {
-        myPowerBar.transform.localScale = new Vector3(Mathf.Clamp(MattiasSinIntegerRed, 0, 1), myPowerBar.transform.localScale.y, myPowerBar.transform.localScale.z);
+        myPowerBar.transform.localScale = new Vector3(Mathf.Clamp(myPower/3.5f,0,1), myPowerBar.transform.localScale.y, myPowerBar.transform.localScale.z);
+
     }
 }
