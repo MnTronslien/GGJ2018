@@ -33,7 +33,8 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioClip _backwardSound;
 
     [Header("Movement Tweaking")]
-    [Range(0.1f, 0.5f)] public float _idleApproachSpeed = 0.2f;
+    [Range(0.1f, 0.5f)]
+    public float _idleApproachSpeed = 0.2f;
     [Range(1f, 10f)] public float _chargeMultiplier = 1;
 
 
@@ -85,9 +86,18 @@ public class PlayerBehaviour : MonoBehaviour
         else _otherPlayer = GameObject.Find("Player 1");
 
         _Speaker = GetComponent<AudioSource>();
+    }
 
+    [HideInInspector]
+    private float[] ChargeValues = new float[]
+    {
+              //Counter
+        0.5f, //Moving Backward
+        1.0f, //Punching
+        1.5f, //Moving Forward
+        3.5f, //Power Punch
 
-}
+    };
 
     // Update is called once per frame
     void Update()
@@ -119,11 +129,11 @@ public class PlayerBehaviour : MonoBehaviour
             Charge(); //This metod handles charging attacks, wich the player can do while in idle.
             if (Input.GetButtonUp("Fire" + _playerNumber))
             {
-                if (_charge < 0.5)
+                if (_charge < ChargeValues[0])
                 {
                     _state = State.Counter;
                 }
-                else if (_charge < 1)
+                else if (_charge < ChargeValues[1])
                 {
                     _state = State.Moving;
                     StartCoroutine(Moving(Direction.Backward));
@@ -131,23 +141,23 @@ public class PlayerBehaviour : MonoBehaviour
                     _Speaker.pitch = Random.Range(0.75f, 1.2f);
                     _Speaker.PlayOneShot(_backwardSound);
                 }
-                else if (_charge < 1.5)
+                else if (_charge < ChargeValues[2])
                 {
                     _state = State.Punching;
                     Punch(Attack.Light);
 
                     _Speaker.pitch = Random.Range(0.9f, 1.1f);
-                    _Speaker.PlayOneShot(_punches[Random.Range(0,_punches.Length)]);
+                    _Speaker.PlayOneShot(_punches[Random.Range(0, _punches.Length)]);
                     //animasjon spilles av her og har en eventcall i animasjon step som resetter til idle state
                 }
-                else if (_charge < 3.5)
+                else if (_charge < ChargeValues[3])
                 {
                     _state = State.Moving;
-                    Moving(Direction.Forward);
+                    StartCoroutine(Moving(Direction.Forward));
                     _Speaker.pitch = Random.Range(0.75f, 1.2f);
                     _Speaker.PlayOneShot(_forwardSound);
                 }
-                else if (_charge >= 3.5)
+                else
                 {
                     _state = State.Punching;
                     Punch(Attack.Heavy);
@@ -194,7 +204,7 @@ public class PlayerBehaviour : MonoBehaviour
                 _otherPlayer.GetComponent<PlayerBehaviour>().TakeDamage(); //if we are close enought for the opuch to connect, we tell the other player to take damage.
             }
         }
-       
+
     }
 
     private IEnumerator Moving(Direction dir)
