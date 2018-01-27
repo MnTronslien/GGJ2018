@@ -42,6 +42,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Light, Heavy //If we get more attacks in the future, like projectile. add them as options under this enum
     }
+    public float _moveDuration = 1;
 
 
     //Setting up component references, Awake() is called before Start()
@@ -123,6 +124,7 @@ public class PlayerBehaviour : MonoBehaviour
             //TODO determine action based on charge
 
         }
+
         _isEnteringState = false; //reset entering state to false
 
     } //End Update
@@ -141,13 +143,14 @@ public class PlayerBehaviour : MonoBehaviour
             if (dir == Direction.Forward) dir = Direction.Backward;
             else dir = Direction.Forward;
         }
-        Vector3 endPos = startPos + (dir == Direction.Forward ? Vector3.left : -Vector3.left);
-        for (float i = 0; i < 1; i += Time.deltaTime) //this should mach the timing of the animation, for now i use a second.
+        Vector3 endPos = startPos + (dir == Direction.Forward ? -Vector3.left : Vector3.left);
+        for (float i = 0; i < _moveDuration; i += Time.deltaTime) //this should mach the timing of the animation, for now i use a second.
         {
-            transform.position = Vector3.Lerp(startPos, endPos, i);
+            transform.position = Vector3.Lerp(startPos, endPos, i / _moveDuration);
             yield return null;
         }
         transform.position = endPos;
+        _state = State.Idle;
 
     }
 
