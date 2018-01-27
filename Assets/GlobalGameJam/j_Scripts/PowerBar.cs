@@ -41,14 +41,13 @@ public class PowerBar : MonoBehaviour
             //_Blackbar.localScale = new Vector3(Mathf.Clamp(_PB._charge / 3.5f,0,1), _Blackbar.localScale.y, _Blackbar.localScale.z);
             //_Blackbar.anchorMin = new Vector2(1, 0);
             float relativecharge = Mathf.Clamp(_PB._charge / 3.5f, 0, 1);
-            //Debug.Log(relativecharge);
+            Debug.Log(relativecharge);
             _Blackbar.anchorMax = new Vector2(Mathf.Lerp(0.01f, 0.99f, relativecharge), _Blackbar.anchorMax.y);
             _Blackbar.sizeDelta = Vector2.one;
         }
         else
         {
             float relativecharge = Mathf.Clamp(_PB._charge / 3.5f, 0, 1);
-            //Debug.Log(relativecharge);
             _Blackbar.anchorMin = new Vector2(Mathf.Lerp(0.99f, 0.01f, relativecharge), _Blackbar.anchorMin.y);
             _Blackbar.sizeDelta = Vector2.one;
         }

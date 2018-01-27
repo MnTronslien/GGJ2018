@@ -101,8 +101,6 @@ public class PlayerBehaviour : MonoBehaviour
             _lastState = _state;
         }
 
-
-
         //State Machine -------------------------------------------------------------------------------------------
         //If you do not know what a state machine is, the basic concept is 
         //that you organize the behaviour into certain states that decribe what the player (or enmy or whatever) may do.
@@ -141,6 +139,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                     _Speaker.pitch = Random.Range(0.9f, 1.1f);
                     _Speaker.PlayOneShot(_punches[Random.Range(0,_punches.Length)]);
+                    //animasjon spilles av her og har en eventcall i animasjon step som resetter til idle state
                 }
                 else if (_charge < 3.5)
                 {
@@ -191,6 +190,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             //TODO: play light attack animation
             _animator.SetTrigger("Punch");
+            if (Vector3.Distance(transform.position, _otherPlayer.transform.position) < _maximumCloseness + 1)
+            {
+                _otherPlayer.GetComponent<PlayerBehaviour>().TakeDamage(); //if we are close enought for the opuch to connect, we tell the other player to take damage.
+            }
         }
        
     }
@@ -230,9 +233,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         //charge reset on state exit and not here
     }
-    public void hitDetection()
+    public void TakeDamage()
     {
-
+        _animator.SetTrigger("BeingHit");
     }
 
     public void SetState(State newstate)
