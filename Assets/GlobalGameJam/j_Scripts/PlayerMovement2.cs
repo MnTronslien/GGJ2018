@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement2 : MonoBehaviour
 {
 
     public Transform otherPlayer;
@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [Range(-3f, 3f)] public float thrust;
 
     private Rigidbody rb1;
-    
+
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
-            GetComponent<Rigidbody>().AddForce(new Vector3(thrust,0,0), ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(new Vector3(thrust, 0, 0), ForceMode.Impulse);
         }
 
 
