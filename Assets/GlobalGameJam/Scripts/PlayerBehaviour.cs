@@ -89,7 +89,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     [HideInInspector]
-    private float[] ChargeValues = new float[]
+    public float[] ChargeValues = new float[]
     {
               //Counter
         0.5f, //Moving Backward
