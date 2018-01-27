@@ -102,7 +102,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         //State Machine -------------------------------------------------------------------------------------------
         //If you do not know what a state machine is, the basic concept is 
-        //that you organize the behaviour into certain states that decribe what the player (or enmy or whatever) may do.
+        //that you organize the behaviour into certain states that decribe what the player (or enemy or whatever) may do.
         //The clue here is that each state is *inclusive* and not exlusive in the options of behaviour.
         //An example of this is that "jumping" is possible both while idle and moving. 
         //Instead of making specialized bahaviour for jumping and idle, we just allow both states to call the same method and transition into jumping state.
