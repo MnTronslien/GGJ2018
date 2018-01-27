@@ -114,7 +114,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.752
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -158,7 +158,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -182,7 +182,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &95853982479368162
 Animator:
   serializedVersion: 3
@@ -211,11 +211,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874470f18d39c5443872e330d49279f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _state: 3
   _punches:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _jumping: []
+  - {fileID: 8300000, guid: ca7cf565dde861a45a26f3f0c0d79fea, type: 3}
+  - {fileID: 8300000, guid: 3e5cf4c59b670614887ff3764f52f519, type: 3}
+  - {fileID: 8300000, guid: 3a626a0a903cd25419e2b5fdc9bbe459, type: 3}
+  _powerPunch: {fileID: 8300000, guid: 1778a980e14f8264681ceac99a3bee1b, type: 3}
+  _forwardSound: {fileID: 0}
+  _backwardSound: {fileID: 0}
+  _movementSpeed: 0
+  _chargeMultiplier: 0
   _playerNumber: 1
   _charge: 0
   _moveDuration: 0.01

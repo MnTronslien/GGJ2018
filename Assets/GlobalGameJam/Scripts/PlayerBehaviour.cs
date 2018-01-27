@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,7 +28,13 @@ public class PlayerBehaviour : MonoBehaviour
     //Sounds
     [Header("Sounds")]
     public AudioClip[] _punches;
-    public AudioClip[] _jumping;
+    public AudioClip _powerPunch;
+    public AudioClip _forwardSound;
+    public AudioClip _backwardSound;
+
+    [Header("Movement Tweaking")]
+    [Range(0.1f,0.5f)] public float _movementSpeed;
+    [Range(1f, 10f)] public float _chargeMultiplier;
 
 
     //other global variables
@@ -79,7 +84,11 @@ public class PlayerBehaviour : MonoBehaviour
             _otherPlayer = GameObject.Find("Player 2");
         }
         else _otherPlayer = GameObject.Find("Player 1");
-    }
+
+        _Speaker = GetComponent<AudioSource>();
+
+
+}
 
     // Update is called once per frame
     void Update()
@@ -108,7 +117,6 @@ public class PlayerBehaviour : MonoBehaviour
             //Usefull for for setting variables that is needed for this state, but only needs to be run once
             if (_isEnteringState)
             {
-
                 _charge = 0;
             }
             Charge(); //This metod handles charging attacks, wich the player can do while in idle.
@@ -122,22 +130,32 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     _state = State.Moving;
                     StartCoroutine(Moving(Direction.Backward));
+
+                    _Speaker.pitch = Random.Range(0.75f, 1.2f);
+                    _Speaker.PlayOneShot(_backwardSound);
                 }
                 else if (_charge < 1.5)
                 {
                     _state = State.Punching;
                     Punch(Attack.Light);
-                    //add punching lud
+
+                    _Speaker.pitch = Random.Range(0.9f, 1.1f);
+                    _Speaker.PlayOneShot(_punches[Random.Range(0,_punches.Length)]);
                 }
                 else if (_charge < 3.5)
                 {
                     _state = State.Moving;
                     Moving(Direction.Forward);
+                    _Speaker.pitch = Random.Range(0.75f, 1.2f);
+                    _Speaker.PlayOneShot(_forwardSound);
                 }
                 else if (_charge >= 3.5)
                 {
                     _state = State.Punching;
                     Punch(Attack.Heavy);
+                    _Speaker.pitch = Random.Range(0.9f, 1.1f);
+                    _Speaker.PlayOneShot(_powerPunch);
+
                     //TODO:PlayPuch animation
                 }
 
@@ -156,11 +174,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (_playerNumber == 1)
             {
-                transform.position = transform.position + (Vector3.right * 0.2f);
+                transform.position = transform.position + (Vector3.right * _movementSpeed);
             }
             else
             {
-                transform.position = transform.position + (Vector3.left * 0.2f);
+                transform.position = transform.position + (Vector3.left * _movementSpeed);
             }
         }
     }
@@ -207,7 +225,7 @@ public class PlayerBehaviour : MonoBehaviour
         //if button down increase charge
         if (Input.GetButton("Fire" + _playerNumber))
         {
-            _charge += Time.deltaTime;
+            _charge += Time.deltaTime * _chargeMultiplier;
         }
 
         //charge reset on state exit and not here
