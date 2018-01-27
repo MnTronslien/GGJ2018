@@ -9,6 +9,7 @@ using UnityEngine.AI;
 //mntronslien@gmail.com
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Animator))]
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     //component refs
     private AudioSource _Speaker;
+    private Animator _animator;
 
     //Sounds
     [Header("Sounds")]
@@ -46,7 +48,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float _lightPunchDuration = 1;   //base value of 1 second
     public float _heavyPunchDuration = 1;   //base value of 1 second
     public float _idleApproachSpeed = 1;     //base value of 1 second
-    public GameObject _otherPlayer;
+    private GameObject _otherPlayer;
+    public float _maximumCloseness = 1;
 
 
 
@@ -62,7 +65,20 @@ public class PlayerBehaviour : MonoBehaviour
             GameObject.Find("Player " + _playerNumber);
         }
         gameObject.name = "Player " + _playerNumber;
+
+        _animator = GetComponent<Animator>();
+
+
         Debug.Log("<b>Controlls:</b> left ctrl (p1) & right ctrl (p2)");
+    }
+
+    private void Start()
+    {
+        if (_playerNumber == 1)
+        {
+            _otherPlayer = GameObject.Find("Player 2");
+        }
+        else _otherPlayer = GameObject.Find("Player 1");
     }
 
     // Update is called once per frame
@@ -92,7 +108,7 @@ public class PlayerBehaviour : MonoBehaviour
             //Usefull for for setting variables that is needed for this state, but only needs to be run once
             if (_isEnteringState)
             {
-                //set animation idle
+
                 _charge = 0;
             }
             Charge(); //This metod handles charging attacks, wich the player can do while in idle.
@@ -111,6 +127,7 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     _state = State.Punching;
                     Punch(Attack.Light);
+                    //add punching lud
                 }
                 else if (_charge < 3.5)
                 {
@@ -135,7 +152,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Approach(Direction dir)
     {
-        if (_state == State.Idle)
+        if (_state == State.Idle && Vector3.Distance(transform.position, _otherPlayer.transform.position) > _maximumCloseness)
         {
             if (_playerNumber == 1)
             {
@@ -148,19 +165,16 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    private IEnumerator Punch(Attack att)
+    private void Punch(Attack att)
     {
         //play punch animation
 
         if (att == Attack.Light)
         {
             //TODO: play light attack animation
-            for (float i = 0; i < _lightPunchDuration; i += Time.deltaTime) //this should match the timing of the animation.
-            {
-                yield return null;
-            }
+            _animator.SetTrigger("Punch");
         }
-        _state = State.Idle;
+       
     }
 
     private IEnumerator Moving(Direction dir)
@@ -203,6 +217,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     }
 
+    public void SetState(State newstate)
+    {
+        _state = newstate;
+    }
 
     public State GetState() { return _state; }
 }
