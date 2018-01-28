@@ -188,7 +188,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Approach(Direction dir)
     {
-        Debug.Log("yo");
         if (_state == State.Idle && Vector3.Distance(transform.position, _otherPlayer.transform.position) > _maximumCloseness)
         {
             if (_playerNumber == 1)
