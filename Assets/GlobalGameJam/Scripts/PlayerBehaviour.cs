@@ -25,6 +25,8 @@ public class PlayerBehaviour : MonoBehaviour
     private AudioSource _Speaker;
     private Animator _animator;
     private GamestateManager _gsm;
+    private CamSheik _cam;
+    
 
     //Sounds
     [Header("Sounds")]
@@ -82,6 +84,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Start()
     {
+        _cam = GameObject.Find("Main Camera").GetComponent<CamSheik>();
         if (_playerNumber == 1)
         {
             _otherPlayer = GameObject.Find("Player 2");
@@ -129,6 +132,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (_isEnteringState)
             {
                 _charge = 0;
+                _cam.shouldShake = false;
             }
             Charge(); //This metod handles charging attacks, wich the player can do while in idle.
             if (Input.GetButtonUp("Fire" + _playerNumber))
@@ -256,6 +260,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public void TakeDamage()
     {
+        _cam.shouldShake = true;
         _animator.SetTrigger("BeingHit");
         if (_playerNumber == 1)
         {
