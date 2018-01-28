@@ -282,6 +282,10 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public void TakeDamage()
     {
+        if (_state == State.Counter)
+        {
+            return;
+        }
         _cam.shouldShake = true;
         _animator.SetTrigger("BeingHit");
         if (_playerNumber == 1)
