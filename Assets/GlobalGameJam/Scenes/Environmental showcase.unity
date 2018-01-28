@@ -152,10 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1042614026503370, guid: 1129ee90c535e3e4bab92ff213c029cb, type: 2}
-      propertyPath: m_Name
-      value: Managers
-      objectReference: {fileID: 0}
     - target: {fileID: 114638364323744274, guid: 1129ee90c535e3e4bab92ff213c029cb,
         type: 2}
       propertyPath: VictoryImage
@@ -1732,7 +1728,7 @@ Prefab:
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 7.83
       objectReference: {fileID: 0}
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
@@ -1990,7 +1986,7 @@ Prefab:
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 7.83
       objectReference: {fileID: 0}
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}

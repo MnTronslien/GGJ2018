@@ -161,7 +161,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7bfef3248bdeb8240b9058a7351fbe1d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fc2263c676df8c047b8641a8afc68834, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -263,6 +263,6 @@ MonoBehaviour:
   _maxHealth: 3
   _Victory: {fileID: 8300000, guid: d3be1ad364b87a647ab96fbc33446a3e, type: 3}
   _prefightMusic: {fileID: 8300000, guid: ec7eca600c46fca46b5acdc2875af0f9, type: 3}
-  _FightMusic: {fileID: 8300000, guid: 7bfef3248bdeb8240b9058a7351fbe1d, type: 3}
+  _FightMusic: {fileID: 8300000, guid: fc2263c676df8c047b8641a8afc68834, type: 3}
   VictoryImage: {fileID: 0}
   _GState: 1
