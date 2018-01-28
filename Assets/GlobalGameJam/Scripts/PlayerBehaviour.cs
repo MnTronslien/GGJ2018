@@ -57,6 +57,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float _heavyPunchDuration = 1;   //base value of 1 second
     private GameObject _otherPlayer;
     public float _maximumCloseness = 1;
+    public bool isHurt;
 
 
 
@@ -227,7 +228,6 @@ public class PlayerBehaviour : MonoBehaviour
             yield return null;
         }
         transform.position = endPos;
-        _animator.SetTrigger("MovesForward");
         _state = State.Idle;
 
     }
