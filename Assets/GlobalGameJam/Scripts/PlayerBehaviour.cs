@@ -222,13 +222,18 @@ public class PlayerBehaviour : MonoBehaviour
             if (dir == Direction.Forward) dir = Direction.Backward;
             else dir = Direction.Forward;
         }
-        Vector3 endPos = startPos + (dir == Direction.Forward ? -Vector3.left : Vector3.left);
-        for (float i = 0; i < _moveDuration; i += Time.deltaTime) //this should mach the timing of the animation, for now i use a second.
+        Vector3 endPos = startPos + (dir == Direction.Forward ? -Vector3.left : Vector3.left); //Change enpos to the appropriate spot.
+        if (Vector3.Distance(transform.position, _otherPlayer.transform.position) > _maximumCloseness || dir == Direction.Backward)
         {
-            transform.position = Vector3.Lerp(startPos, endPos, i / _moveDuration);
-            yield return null;
+
+            for (float i = 0; i < _moveDuration; i += Time.deltaTime) //this should match the timing of the animation, for now i use a second.
+            {
+                transform.position = Vector3.Lerp(startPos, endPos, i / _moveDuration);
+                yield return null;
+            }
+            transform.position = endPos;
         }
-        transform.position = endPos;
+        _charge = 0;
         _state = State.Idle;
 
     }
