@@ -31,6 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioClip _powerPunch;
     public AudioClip _forwardSound;
     public AudioClip _backwardSound;
+    [Range(0, 1)] public float movementAudioVolume;
 
     [Header("Movement Tweaking")]
     [Range(0.1f, 0.5f)]
@@ -137,7 +138,7 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     _state = State.Moving;
                     StartCoroutine(Moving(Direction.Backward));
-
+                    _Speaker.volume = Random.Range(0.4f, 0.6f);
                     _Speaker.pitch = Random.Range(0.75f, 1.2f);
                     _Speaker.PlayOneShot(_backwardSound);
                 }
@@ -155,6 +156,7 @@ public class PlayerBehaviour : MonoBehaviour
                     _state = State.Moving;
                     StartCoroutine(Moving(Direction.Forward));
                     _Speaker.pitch = Random.Range(0.75f, 1.2f);
+                    _Speaker.volume = Random.Range(0.4f, 0.6f);
                     _Speaker.PlayOneShot(_forwardSound);
                 }
                 else
@@ -223,6 +225,7 @@ public class PlayerBehaviour : MonoBehaviour
             yield return null;
         }
         transform.position = endPos;
+        _animator.SetTrigger("MovesForward");
         _state = State.Idle;
 
     }
