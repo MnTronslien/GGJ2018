@@ -44,7 +44,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     //other global variables
     public int _playerNumber;
-    public float _charge = 0;
+    private float _charge = 0;
+    public float Charge {
+        get
+        {
+            if(_gsm._GState == GamestateManager.GameState.Fight)
+            {
+                return _charge;
+            }
+            return 0;
+        }
+    }
 
     private enum Direction
     {
@@ -134,15 +144,15 @@ public class PlayerBehaviour : MonoBehaviour
                     _charge = 0;
                     _cam.shouldShake = false;
                 }
-                Charge(); //This metod handles charging attacks, wich the player can do while in idle.
+                HandleCharge(); //This metod handles charging attacks, wich the player can do while in idle.
                 if (Input.GetButtonUp("Fire" + _playerNumber))
                 {
-                    if (_charge < ChargeValues[0])
+                    if (Charge < ChargeValues[0])
                     {
                         _state = State.Counter;
                         _animator.SetTrigger("Block");
                     }
-                    else if (_charge < ChargeValues[1])
+                    else if (Charge < ChargeValues[1])
                     {
                         _state = State.Moving;
                         StartCoroutine(Moving(Direction.Backward));
@@ -150,7 +160,7 @@ public class PlayerBehaviour : MonoBehaviour
                         _Speaker.pitch = Random.Range(0.75f, 1.2f);
                         _Speaker.PlayOneShot(_backwardSound);
                     }
-                    else if (_charge < ChargeValues[2])
+                    else if (Charge < ChargeValues[2])
                     {
                         _state = State.Punching;
                         Punch(Attack.Light);
@@ -159,7 +169,7 @@ public class PlayerBehaviour : MonoBehaviour
                         _Speaker.PlayOneShot(_punches[Random.Range(0, _punches.Length)]);
                         //animasjon spilles av her og har en eventcall i animasjon step som resetter til idle state
                     }
-                    else if (_charge < ChargeValues[3])
+                    else if (Charge < ChargeValues[3])
                     {
                         _state = State.Moving;
                         StartCoroutine(Moving(Direction.Forward));
@@ -246,7 +256,7 @@ public class PlayerBehaviour : MonoBehaviour
     /// <summary>
     /// Listening for charging and setting the current chage level
     /// </summary>
-    private void Charge()
+    private void HandleCharge()
     {
         //detect button down
         //if button down increase charge

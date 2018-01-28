@@ -5,7 +5,7 @@ using UnityEngine;
 public class CamSheik : MonoBehaviour {
     public float power;
     public float duration;
-    private Transform camera;
+    private Transform cameraTransform;
     public float slowDownTime;
     public bool shouldShake;
     private bool otherBool;
@@ -17,7 +17,7 @@ public class CamSheik : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        camera = Camera.main.transform;
+        cameraTransform = Camera.main.transform;
         initialDuration = duration;
         startingPos = transform.position;
 	}
@@ -30,7 +30,7 @@ public class CamSheik : MonoBehaviour {
         {
             if (duration > 0)
             {
-                camera.localPosition = startingPos + Random.insideUnitSphere * power;
+                cameraTransform.localPosition = startingPos + Random.insideUnitSphere * power;
                 duration -= Time.deltaTime * slowDownTime;
             }
             else
@@ -43,7 +43,7 @@ public class CamSheik : MonoBehaviour {
 
         if (shouldShake == false)
         {
-            camera.localPosition = startingPos;
+            cameraTransform.localPosition = startingPos;
         }
     }
 }

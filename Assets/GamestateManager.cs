@@ -64,7 +64,7 @@ public class GamestateManager : MonoBehaviour
         //TODO: check for end game
         if ((_player1Health == 0 || _player2SHealth == 0) && _GState == GameState.Fight)
         {
-            GameEnd();
+            StartCoroutine(GameEnd());
         }
     }
 
@@ -120,17 +120,33 @@ public class GamestateManager : MonoBehaviour
     private void StartGame()
     {
         _GState = GameState.Fight;
-
     }
-    public void GameEnd()
-    { 
-        _GState = GameState.Finish;
+
+    public IEnumerator GameEnd()
+    {
+
         _p1.transform.position = _p1StartPos;
         _p1.GetComponent<PlayerBehaviour>().SetState(PlayerBehaviour.State.Dead);
+
         _p2.transform.position = _p2StartPos;
         _p2.GetComponent<PlayerBehaviour>().SetState(PlayerBehaviour.State.Dead);
+
+        yield return null;
+
+        _GState = GameState.Finish;
+
         _musicSpeaker.Stop();
         _anouncerSpeaker.PlayOneShot(_Victory);
-        Invoke("InitializeGame", 6f);
+        yield return new WaitForSeconds(2f);
+        var camSheik = FindObjectOfType<CamSheik>(); //WARNING!!! LAZY!!!
+
+        if (camSheik != null)
+        {
+            camSheik.shouldShake = false;
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        InitializeGame();
     }
 }
