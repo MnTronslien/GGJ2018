@@ -19,6 +19,14 @@ public class GamestateManager : MonoBehaviour
     public GameObject _healthDots;
     public int _maxHealth;
 
+    private AudioSource _anouncerSpeaker, _musicSpeaker;
+
+    public AudioClip _Victory;
+    public AudioClip _prefightMusic;
+    public AudioClip _FightMusic;
+    //public AudioClip _AnouncerFight;
+
+
     
 
     public enum Player
@@ -26,6 +34,11 @@ public class GamestateManager : MonoBehaviour
         player1, player2
     }
 
+    public enum GameState
+    {
+        Fight, Finish
+    }
+    public GameState _GState = GameState.Finish;
 
 
     // Use this for initialization
@@ -37,6 +50,8 @@ public class GamestateManager : MonoBehaviour
         _p1StartPos = _p1.transform.position;
         _p2StartPos = _p2.transform.position;
 
+        _anouncerSpeaker = GetComponent<AudioSource>();
+        _musicSpeaker = transform.GetChild(0).GetComponent<AudioSource>();
 
         InitializeGame();
 
@@ -47,6 +62,10 @@ public class GamestateManager : MonoBehaviour
     void Update()
     {
         //TODO: check for end game
+        if ((_player1Health == 0 || _player2SHealth == 0) && _GState == GameState.Fight)
+        {
+            GameEnd();
+        }
     }
 
     private void InitializeGame()
@@ -72,6 +91,13 @@ public class GamestateManager : MonoBehaviour
         }
         _player1Health = _maxHealth;
         _player2SHealth = _maxHealth;
+        _p1.GetComponent<PlayerBehaviour>().SetState(PlayerBehaviour.State.Idle);
+        _p2.GetComponent<PlayerBehaviour>().SetState(PlayerBehaviour.State.Idle);
+        //_anouncerSpeaker.PlayOneShot(_AnouncerFight);
+        _anouncerSpeaker.PlayOneShot(_prefightMusic);
+       _musicSpeaker.clip = _FightMusic;
+       _musicSpeaker.Play(142000);
+        Invoke("StartGame", 3);
     }
     /// <summary>
     /// Does not support anything else that -1 as a damage value at the moment
@@ -90,5 +116,21 @@ public class GamestateManager : MonoBehaviour
             _player2SHealth += amount;
             Destroy(_healthTray.transform.GetChild(1).GetChild(0).gameObject);
         }
+    }
+    private void StartGame()
+    {
+        _GState = GameState.Fight;
+
+    }
+    public void GameEnd()
+    { 
+        _GState = GameState.Finish;
+        _p1.transform.position = _p1StartPos;
+        _p1.GetComponent<PlayerBehaviour>().SetState(PlayerBehaviour.State.Dead);
+        _p2.transform.position = _p2StartPos;
+        _p2.GetComponent<PlayerBehaviour>().SetState(PlayerBehaviour.State.Dead);
+        _musicSpeaker.Stop();
+        _anouncerSpeaker.PlayOneShot(_Victory);
+        Invoke("InitializeGame", 6f);
     }
 }

@@ -109,81 +109,81 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-        if (_state != _lastState) //detect state transition
+        if (_gsm._GState == GamestateManager.GameState.Fight)
         {
-            _isEnteringState = true;
-            _lastState = _state;
-        }
-
-        //State Machine -------------------------------------------------------------------------------------------
-        //If you do not know what a state machine is, the basic concept is 
-        //that you organize the behaviour into certain states that decribe what the player (or enemy or whatever) may do.
-        //The clue here is that each state is *inclusive* and not exlusive in the options of behaviour.
-        //An example of this is that "jumping" is possible both while idle and moving. 
-        //Instead of making specialized bahaviour for jumping and idle, we just allow both states to call the same method and transition into jumping state.
-
-        //Idle state
-        if (_state == State.Idle)
-        {
-            //Use _isEnteringState to declare bahaviour that should only be run the first frame while in this state
-            //Usefull for for setting variables that is needed for this state, but only needs to be run once
-            if (_isEnteringState)
+            if (_state != _lastState) //detect state transition
             {
-                _charge = 0;
-                _cam.shouldShake = false;
+                _isEnteringState = true;
+                _lastState = _state;
             }
-            Charge(); //This metod handles charging attacks, wich the player can do while in idle.
-            if (Input.GetButtonUp("Fire" + _playerNumber))
+
+            //State Machine -------------------------------------------------------------------------------------------
+            //If you do not know what a state machine is, the basic concept is 
+            //that you organize the behaviour into certain states that decribe what the player (or enemy or whatever) may do.
+            //The clue here is that each state is *inclusive* and not exlusive in the options of behaviour.
+            //An example of this is that "jumping" is possible both while idle and moving. 
+            //Instead of making specialized bahaviour for jumping and idle, we just allow both states to call the same method and transition into jumping state.
+
+            //Idle state
+            if (_state == State.Idle)
             {
-                if (_charge < ChargeValues[0])
+                //Use _isEnteringState to declare bahaviour that should only be run the first frame while in this state
+                //Usefull for for setting variables that is needed for this state, but only needs to be run once
+                if (_isEnteringState)
                 {
-                    _state = State.Counter;
-                    _animator.SetTrigger("Block");
+                    _charge = 0;
+                    _cam.shouldShake = false;
                 }
-                else if (_charge < ChargeValues[1])
+                Charge(); //This metod handles charging attacks, wich the player can do while in idle.
+                if (Input.GetButtonUp("Fire" + _playerNumber))
                 {
-                    _state = State.Moving;
-                    StartCoroutine(Moving(Direction.Backward));
-                    _Speaker.volume = Random.Range(0.4f, 0.6f);
-                    _Speaker.pitch = Random.Range(0.75f, 1.2f);
-                    _Speaker.PlayOneShot(_backwardSound);
-                }
-                else if (_charge < ChargeValues[2])
-                {
-                    _state = State.Punching;
-                    Punch(Attack.Light);
+                    if (_charge < ChargeValues[0])
+                    {
+                        _state = State.Counter;
+                        _animator.SetTrigger("Block");
+                    }
+                    else if (_charge < ChargeValues[1])
+                    {
+                        _state = State.Moving;
+                        StartCoroutine(Moving(Direction.Backward));
+                        _Speaker.volume = Random.Range(0.4f, 0.6f);
+                        _Speaker.pitch = Random.Range(0.75f, 1.2f);
+                        _Speaker.PlayOneShot(_backwardSound);
+                    }
+                    else if (_charge < ChargeValues[2])
+                    {
+                        _state = State.Punching;
+                        Punch(Attack.Light);
 
-                    _Speaker.pitch = Random.Range(0.9f, 1.1f);
-                    _Speaker.PlayOneShot(_punches[Random.Range(0, _punches.Length)]);
-                    //animasjon spilles av her og har en eventcall i animasjon step som resetter til idle state
-                }
-                else if (_charge < ChargeValues[3])
-                {
-                    _state = State.Moving;
-                    StartCoroutine(Moving(Direction.Forward));
-                    _Speaker.pitch = Random.Range(0.75f, 1.2f);
-                    _Speaker.volume = Random.Range(0.4f, 0.6f);
-                    _Speaker.PlayOneShot(_forwardSound);
-                }
-                else
-                {
-                    _state = State.Punching;
-                    Punch(Attack.Heavy);
-                    _Speaker.pitch = Random.Range(0.9f, 1.1f);
-                    _Speaker.PlayOneShot(_powerPunch);
+                        _Speaker.pitch = Random.Range(0.9f, 1.1f);
+                        _Speaker.PlayOneShot(_punches[Random.Range(0, _punches.Length)]);
+                        //animasjon spilles av her og har en eventcall i animasjon step som resetter til idle state
+                    }
+                    else if (_charge < ChargeValues[3])
+                    {
+                        _state = State.Moving;
+                        StartCoroutine(Moving(Direction.Forward));
+                        _Speaker.pitch = Random.Range(0.75f, 1.2f);
+                        _Speaker.volume = Random.Range(0.4f, 0.6f);
+                        _Speaker.PlayOneShot(_forwardSound);
+                    }
+                    else
+                    {
+                        _state = State.Punching;
+                        Punch(Attack.Heavy);
+                        _Speaker.pitch = Random.Range(0.9f, 1.1f);
+                        _Speaker.PlayOneShot(_powerPunch);
 
-                    //TODO:PlayPuch animation
+                        //TODO:PlayPuch animation
+                    }
+
                 }
+                //TODO determine action based on charge
 
             }
-            //TODO determine action based on charge
 
+            _isEnteringState = false; //reset entering state to false
         }
-
-        _isEnteringState = false; //reset entering state to false
-
     } //End Update
 
     private void Approach(Direction dir)
