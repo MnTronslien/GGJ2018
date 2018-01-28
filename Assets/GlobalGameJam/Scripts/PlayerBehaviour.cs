@@ -136,6 +136,7 @@ public class PlayerBehaviour : MonoBehaviour
                 if (_charge < ChargeValues[0])
                 {
                     _state = State.Counter;
+                    _animator.SetTrigger("Block");
                 }
                 else if (_charge < ChargeValues[1])
                 {
