@@ -26,7 +26,7 @@ public class GamestateManager : MonoBehaviour
     public AudioClip _FightMusic;
     //public AudioClip _AnouncerFight;
 
-
+    public GameObject VictoryImage;
     
 
     public enum Player
@@ -124,7 +124,6 @@ public class GamestateManager : MonoBehaviour
 
     public IEnumerator GameEnd()
     {
-
         _p1.transform.position = _p1StartPos;
         _p1.GetComponent<PlayerBehaviour>().SetState(PlayerBehaviour.State.Dead);
 
@@ -138,6 +137,7 @@ public class GamestateManager : MonoBehaviour
         _musicSpeaker.Stop();
         _anouncerSpeaker.PlayOneShot(_Victory);
         yield return new WaitForSeconds(2f);
+        VictoryImage.SetActive(true);
         var camSheik = FindObjectOfType<CamSheik>(); //WARNING!!! LAZY!!!
 
         if (camSheik != null)
@@ -146,6 +146,7 @@ public class GamestateManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(3f);
+        VictoryImage.SetActive(false);
 
         InitializeGame();
     }
