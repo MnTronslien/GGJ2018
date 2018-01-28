@@ -212,14 +212,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _punches:
-  - {fileID: 8300000, guid: ca7cf565dde861a45a26f3f0c0d79fea, type: 3}
-  - {fileID: 8300000, guid: 3e5cf4c59b670614887ff3764f52f519, type: 3}
-  - {fileID: 8300000, guid: 3a626a0a903cd25419e2b5fdc9bbe459, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _powerPunch: {fileID: 8300000, guid: 1778a980e14f8264681ceac99a3bee1b, type: 3}
   _forwardSound: {fileID: 0}
   _backwardSound: {fileID: 0}
   _idleApproachSpeed: 0.2
-  _chargeMultiplier: 1
+  _chargeMultiplier: 3
   _playerNumber: 1
   _charge: 0
   _moveDuration: 0.01

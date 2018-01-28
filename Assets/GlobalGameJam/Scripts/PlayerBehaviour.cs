@@ -24,6 +24,7 @@ public class PlayerBehaviour : MonoBehaviour
     //component refs
     private AudioSource _Speaker;
     private Animator _animator;
+    private GamestateManager _gsm;
 
     //Sounds
     [Header("Sounds")]
@@ -87,6 +88,7 @@ public class PlayerBehaviour : MonoBehaviour
         else _otherPlayer = GameObject.Find("Player 1");
 
         _Speaker = GetComponent<AudioSource>();
+        _gsm = GameObject.Find("Managers").GetComponent<GamestateManager>();
     }
 
     [HideInInspector]
@@ -248,6 +250,15 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage()
     {
         _animator.SetTrigger("BeingHit");
+        if (_playerNumber == 1)
+        {
+            _gsm.UpdateHealth(GamestateManager.Player.player1, -1);
+        }
+        else
+        {
+            _gsm.UpdateHealth(GamestateManager.Player.player2, -1);
+        }
+
     }
 
     public void SetState(State newstate)

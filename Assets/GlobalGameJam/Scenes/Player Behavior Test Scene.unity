@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 855470656}
   - component: {fileID: 855470658}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Spacer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -340,9 +340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 145.8
+  m_MinWidth: 50
   m_MinHeight: -1
-  m_PreferredWidth: 0.1
+  m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -606,8 +606,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7263afc4c5fd69049aa39132ad7dfb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player1Score: 0
-  _player2Score: 0
+  _player1Health: 0
+  _player2SHealth: 0
+  _healthTrayPrefab: {fileID: 1250200403592830, guid: 0f88a6ad7a4786f46a73be14c33d85f1,
+    type: 2}
+  _healthDots: {fileID: 1760184399902604, guid: de466966705fe8a4192d36fe62910062,
+    type: 2}
+  _maxHealth: 3
 --- !u!224 &1406016361 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
@@ -977,7 +982,7 @@ Prefab:
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 636.44995
+      value: 612.49994
       objectReference: {fileID: 0}
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
@@ -987,7 +992,7 @@ Prefab:
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 327.09995
+      value: 374.99997
       objectReference: {fileID: 0}
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
@@ -1136,7 +1141,7 @@ GameObject:
   - component: {fileID: 2018274354}
   - component: {fileID: 2018274355}
   m_Layer: 5
-  m_Name: Healthbars
+  m_Name: Chargebars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1235,7 +1240,7 @@ Prefab:
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 163.54997
+      value: 187.49998
       objectReference: {fileID: 0}
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
@@ -1245,7 +1250,7 @@ Prefab:
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 327.09995
+      value: 374.99997
       objectReference: {fileID: 0}
     - target: {fileID: 224397148633930056, guid: d49404eaf5ffe624096f72c3f44e26dc,
         type: 2}
