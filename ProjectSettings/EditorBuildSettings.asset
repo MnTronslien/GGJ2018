@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/GlobalGameJam/Scenes/Environmental showcase.unity
+    guid: 74958b5e6cf3bae4db03c13019e41765

@@ -43,7 +43,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 7be2dddc91597224b92dc3ffac903ba4,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -463,7 +464,7 @@ GameObject:
   - component: {fileID: 634189611}
   - component: {fileID: 634189610}
   - component: {fileID: 634189609}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,7 +638,7 @@ GameObject:
   - component: {fileID: 902306539}
   - component: {fileID: 902306538}
   - component: {fileID: 902306537}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Image (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,6 +774,15 @@ Prefab:
     - target: {fileID: 4088515289086760, guid: c7235e102e783d74db3111bfe09dee1d, type: 2}
       propertyPath: m_LocalPosition.x
       value: -2.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 212333937720092392, guid: c7235e102e783d74db3111bfe09dee1d,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4693868360668622, guid: c7235e102e783d74db3111bfe09dee1d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.936
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7235e102e783d74db3111bfe09dee1d, type: 2}
@@ -1035,7 +1045,7 @@ GameObject:
   - component: {fileID: 1201938988}
   - component: {fileID: 1201938987}
   - component: {fileID: 1201938986}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Image (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
