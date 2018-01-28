@@ -38,9 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bakgrunn
+    uniqueID: 1426260303
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: UI Bakgrunn
     uniqueID: 355433133
+    locked: 0
+  - name: Players
+    uniqueID: 3749777597
+    locked: 0
+  - name: 
+    uniqueID: 595655863
     locked: 0

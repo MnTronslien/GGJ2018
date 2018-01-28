@@ -212,12 +212,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _punches:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _powerPunch: {fileID: 8300000, guid: 1778a980e14f8264681ceac99a3bee1b, type: 3}
-  _forwardSound: {fileID: 0}
-  _backwardSound: {fileID: 0}
+  - {fileID: 8300000, guid: ac00193435c284449a7e2b3d5b17a673, type: 3}
+  - {fileID: 8300000, guid: e11401f6e3cdaaf45a89a5b712197f8f, type: 3}
+  - {fileID: 8300000, guid: 422e2a9372ca16b4a9aa135a847bf856, type: 3}
+  _powerPunch: {fileID: 8300000, guid: 034b0c75159b4224f8683868baf56550, type: 3}
+  _forwardSound: {fileID: 8300000, guid: de0d40a209fe63f45a58dfbeee9533bf, type: 3}
+  _backwardSound: {fileID: 8300000, guid: 5e5c8ce016556464ea60251134060b81, type: 3}
+  movementAudioVolume: 0.677
   _idleApproachSpeed: 0.2
   _chargeMultiplier: 3
   _playerNumber: 1
@@ -226,6 +227,12 @@ MonoBehaviour:
   _lightPunchDuration: 1
   _heavyPunchDuration: 1
   _maximumCloseness: 2.2
+  isHurt: 0
+  ChargeValues:
+  - 0.5
+  - 1
+  - 1.5
+  - 3.5
 --- !u!212 &212247610648970144
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -345,8 +352,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -545189699
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1e1e6eb06d9e56e4aad8bddbe86aece5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
