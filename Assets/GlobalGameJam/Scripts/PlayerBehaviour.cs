@@ -26,7 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Animator _animator;
     private GamestateManager _gsm;
     private CamSheik _cam;
-    
+
 
     //Sounds
     [Header("Sounds")]
@@ -45,10 +45,11 @@ public class PlayerBehaviour : MonoBehaviour
     //other global variables
     public int _playerNumber;
     private float _charge = 0;
-    public float Charge {
+    public float Charge
+    {
         get
         {
-            if(_gsm._GState == GamestateManager.GameState.Fight)
+            if (_gsm._GState == GamestateManager.GameState.Fight)
             {
                 return _charge;
             }
@@ -198,6 +199,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Approach(Direction dir)
     {
+        if (_gsm._GState != GamestateManager.GameState.Fight)
+        {
+            return;
+        }
         if (_state == State.Idle && Vector3.Distance(transform.position, _otherPlayer.transform.position) > _maximumCloseness)
         {
             if (_playerNumber == 1)
