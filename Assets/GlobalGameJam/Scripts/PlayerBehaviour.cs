@@ -229,6 +229,14 @@ public class PlayerBehaviour : MonoBehaviour
                 _otherPlayer.GetComponent<PlayerBehaviour>().TakeDamage(); //if we are close enought for the opuch to connect, we tell the other player to take damage.
             }
         }
+        else
+        {
+            _animator.SetTrigger("PunchHeavy");
+            if (Vector3.Distance(transform.position, _otherPlayer.transform.position) < _maximumCloseness + 2)
+            {
+                _otherPlayer.GetComponent<PlayerBehaviour>().TakeDamage(); //if we are close enought for the opuch to connect, we tell the other player to take damage.
+            }
+        }
 
     }
 
